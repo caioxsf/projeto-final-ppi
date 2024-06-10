@@ -1,0 +1,32 @@
+{
+  "name": "projeto-final-ppi",
+  "version": "1.0.0",
+  "description": "projeto final",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "teste"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caioxsf/projeto-final-ppi.git"
+  },
+  "keywords": [
+    "projeto",
+    "final",
+    "ppi"
+  ],
+  "author": "caio nobile",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caioxsf/projeto-final-ppi/issues"
+  },
+  "homepage": "https://github.com/caioxsf/projeto-final-ppi#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "node": "^20.14.0"
+  }
+}
