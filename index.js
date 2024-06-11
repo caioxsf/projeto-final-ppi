@@ -76,7 +76,6 @@ function autenticarUsuario(requisicao, resposta)
     }
 }
 
-
 app.post ('/login', autenticarUsuario);
 
 app.get('/login', (req,resp)=>{
@@ -199,6 +198,23 @@ app.get('/listarInteressados', (req, resp) => {
         <title>Lista interessados</title>
     </head>
     <body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="menu.html">Pet shop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link "  href="cadastroInteressados.html">Cadastro de interessados</a>
+              <a class="nav-link" href="cadastroPet.html">Cadastro de pets</a>
+              <a class="nav-link" href="/adotar">Adotar um Pet</a>
+              <a class="nav-link " href="/logout">Sair</a>
+            </div>
+          </div>
+        </div>
+      </nav>
 
     <h2 class="text-center" style="margin-top: 50px;">Lista de pessoas interessada</h2> 
         
@@ -356,6 +372,23 @@ app.get('/listarPets', (req,resp) => {
     </head>
     <body>
 
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="menu.html">Pet shop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link "  href="cadastroInteressados.html">Cadastro de interessados</a>
+              <a class="nav-link" href="cadastroPet.html">Cadastro de pets</a>
+              <a class="nav-link" href="/adotar">Adotar um Pet</a>
+              <a class="nav-link " href="/logout">Sair</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
     <h2 class="text-center" style="margin-top: 50px;">Lista de pets</h2> 
         
     <div class="container">
@@ -420,7 +453,7 @@ app.get('/adotar', (req, resp) => {
             <div class="navbar-nav">
               <a class="nav-link "  href="cadastroInteressados.html">Cadastro de interessados</a>
               <a class="nav-link" href="cadastroPet.html">Cadastro de pets</a>
-              <a class="nav-link" href="adotarPet.html">Adotar um Pet</a>
+              <a class="nav-link" href="/adotar">Adotar um Pet</a>
               <a class="nav-link " href="/logout">Sair</a>
             </div>
           </div>
@@ -517,6 +550,22 @@ app.get('/listarAdocao', (req,resp) => {
         <title>Lista interessados</title>
     </head>
     <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="menu.html">Pet shop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link "  href="cadastroInteressados.html">Cadastro de interessados</a>
+              <a class="nav-link" href="cadastroPet.html">Cadastro de pets</a>
+              <a class="nav-link" href="/adotar">Adotar um Pet</a>
+              <a class="nav-link " href="/logout">Sair</a>
+            </div>
+          </div>
+        </div>
+      </nav>
 
     <h2 class="text-center" style="margin-top: 50px;">Lista de adoção</h2> 
         
