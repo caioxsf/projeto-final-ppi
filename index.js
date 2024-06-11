@@ -10,13 +10,14 @@ const porta = 3000;
 const app = express();
 const listaInteressados = [];
 const listaPets = [];
+const listaAdocao = [];
 
 app.use(session({
     secret: 'chavescreta',
     resave: true,
     saveUninitialized: true,
     cookie: {
-        maxAge: 1000 * 60 * 15
+        maxAge: 1000 * 60 * 30
     }
 }));
 
@@ -127,7 +128,7 @@ function cadastrarInteressados (req, resp)
                     <div class="navbar-nav">
                       <a class="nav-link " href="cadastroInteressados.html">Cadastro de interessados</a>
                       <a class="nav-link" href="cadastroPet.html">Cadastro de pets</a>
-                      <a class="nav-link" href="#">Adotar um Pet</a>
+                      <a class="nav-link" href="/adotar">Adotar um Pet</a>
                       <a class="nav-link " href="/logout">Sair</a>
                     </div>
                   </div>
@@ -237,6 +238,7 @@ app.get('/listarInteressados', (req, resp) => {
     </html>
 
     `);
+    resp.end();
 });
 
 //cadastro e lista de pets
@@ -279,7 +281,7 @@ function cadastrarPets (req, resp)
                     <div class="navbar-nav">
                       <a class="nav-link "  href="cadastroInteressados.html">Cadastro de interessados</a>
                       <a class="nav-link" href="cadastroPet.html">Cadastro de pets</a>
-                      <a class="nav-link" href="#">Adotar um Pet</a>
+                      <a class="nav-link" href="/adotar">Adotar um Pet</a>
                       <a class="nav-link " href="/logout">Sair</a>
                     </div>
                   </div>
@@ -338,7 +340,7 @@ function cadastrarPets (req, resp)
         `);
 
     }
-       
+    resp.end();
 }
 
 app.get('/listarPets', (req,resp) => {
@@ -392,12 +394,179 @@ app.get('/listarPets', (req,resp) => {
     </html>
 
     `);
+    resp.end();
+});
+
+app.get('/adotar', (req, resp) => {
+
+    resp.write(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <title>Adoção</title>
+    </head>
+    <body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="menu.html">Pet shop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link "  href="cadastroInteressados.html">Cadastro de interessados</a>
+              <a class="nav-link" href="cadastroPet.html">Cadastro de pets</a>
+              <a class="nav-link" href="adotarPet.html">Adotar um Pet</a>
+              <a class="nav-link " href="/logout">Sair</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    <h2 class="text-center" style="margin-top: 50px;">Adoção</h2> 
+    <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-5">
+                        <h5>Pets</h5>
+                        <form action="/listarAdocao" method="POST">
+                        <select class="form-select" aria-label="Default select example" id="pet" name="pet">
+                            <option selected disabled>Selecione uma opção</option>
+    `); 
+    
+        for(let i=0; i<listaPets.length; i++)
+        {
+            resp.write(`
+                <option>${listaPets[i].nomepet}, ${listaPets[i].raca}</option>           
+            `);
+        }
+
+    resp.write(`             
+    </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-5">
+                    <h5 style="margin-top: 25px;">Interessados</h5>
+                    <select class="form-select" aria-label="Default select example" id="inter" name="inter">
+                        <option selected disabled>Selecione uma opção</option>
+`); 
+
+        for(let i=0; i<listaInteressados.length; i++)
+        {
+            resp.write(`
+                <option>${listaInteressados[i].nome}</option>           
+            `);
+            
+        }
+
+        resp.write(`             
+        </select>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary" style="margin-top: 35px;">Adotar</button><br>
+                <a href="/listarAdocao" class="text-center" style="text-decoration: none;">Listar lista de adoções</a><br>
+            </div>
+                </div>
+            </div>
+        </div>
+        `);
+
+        resp.write(`
+        </form>
+    </body>
+    </html>
+
+    `);
+    resp.end();
+});
+
+function formAdocao (req, resp)
+{
+    const dataAdocao = new Date ();
+    const dataFormatada = `${dataAdocao.getDate()}/${dataAdocao.getMonth() + 1}/${dataAdocao.getFullYear()}`;
+    const pet = req.body.pet;
+    const inter = req.body.inter;
+
+    if (pet && inter)
+    {
+        listaAdocao.push ({
+            pet: pet,
+            inter: inter,
+            data: dataFormatada
+        });
+        resp.redirect('/listarAdocao');
+    }
+}
+
+app.get('/listarAdocao', (req,resp) => {
+
+    
+    resp.write(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <title>Lista interessados</title>
+    </head>
+    <body>
+
+    <h2 class="text-center" style="margin-top: 50px;">Lista de adoção</h2> 
+        
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Pets / Raça</th>
+                        <th scope="col">Interessados</th>
+                        <th scope="col">Data</th>
+                    </tr>
+                    </thead>
+                    <tbody>`);
+                    for(let i=0; i<listaAdocao.length; i++)
+                    {
+                        resp.write(`
+                            <tr>
+                                <td>${listaAdocao[i].pet}</td>
+                                <td>${listaAdocao[i].inter}</td>
+                                <td>${listaAdocao[i].data}</td>
+                            </tr>
+                        `);
+                    }
+
+                    resp.write(`
+                    </div>
+                    </div>
+                </div>
+                    </tbody>
+                </table>
+                
+                    <a href="/adotar" class="text-center" style="text-decoration: none;">Voltar para tela de adoção</a><br>
+                    <a href="/menu.html" class="text-center" style="text-decoration: none;">Voltar para o menu</a>
+                
+    </body>
+    </html>
+
+    `);
+    resp.end();
 
 });
+
+// adoção de pet
 
 app.use(usuarioEstaAutenticado,express.static(path.join(process.cwd(), 'protegido')));
 app.post('/cadastroInteressados', cadastrarInteressados);
 app.post('/cadastroPets', cadastrarPets);
+app.post('/listarAdocao', formAdocao);
 
 app.listen(porta,host,() => {
     console.log(`Servidor rodando em http://${host}:${porta}`);
