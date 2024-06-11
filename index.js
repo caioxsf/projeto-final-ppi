@@ -180,7 +180,7 @@ function cadastrarInteressados (req, resp)
                 </div>
             </div>
         
-            
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         </body>
         </html>
         `);
@@ -249,7 +249,7 @@ app.get('/listarInteressados', (req, resp) => {
                 
                     <a href="/cadastroInteressados.html" class="text-center" style="text-decoration: none;">Voltar para tela de cadastro</a><br>
                     <a href="/menu.html" class="text-center" style="text-decoration: none;">Voltar para o menu</a>
-                
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
     </html>
 
@@ -349,7 +349,7 @@ function cadastrarPets (req, resp)
                     </div>
                 </div>
             </div>
-        
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
             
         </body>
         </html>
@@ -422,7 +422,7 @@ app.get('/listarPets', (req,resp) => {
                 
                     <a href="/cadastroPet.html" class="text-center" style="text-decoration: none;">Voltar para tela de cadastro</a><br>
                     <a href="/menu.html" class="text-center" style="text-decoration: none;">Voltar para o menu</a>
-                
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
     </html>
 
@@ -512,6 +512,7 @@ app.get('/adotar', (req, resp) => {
 
         resp.write(`
         </form>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
     </html>
 
@@ -601,7 +602,7 @@ app.get('/listarAdocao', (req,resp) => {
                 
                     <a href="/adotar" class="text-center" style="text-decoration: none;">Voltar para tela de adoção</a><br>
                     <a href="/menu.html" class="text-center" style="text-decoration: none;">Voltar para o menu</a>
-                
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
     </html>
 
