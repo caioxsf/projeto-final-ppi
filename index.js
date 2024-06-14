@@ -25,7 +25,7 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(process.cwd(), 'publico')));
 
-app.use(express.urlencoded({extendend: true}));
+app.use(express.urlencoded({extended: true}));
 
 function usuarioEstaAutenticado (requisicao, resposta, next)
 {
@@ -189,6 +189,7 @@ function cadastrarInteressados (req, resp)
         </html>
         `);
     }
+    resp.end();
 }
 
 app.get('/listarInteressados', (req, resp) => {
@@ -543,7 +544,7 @@ function formAdocao (req, resp)
     }
 }
 
-app.get('/listarAdocao', (req,resp) => {
+app.post('/listarAdocao', (req,resp) => {
 
     
     resp.write(`
