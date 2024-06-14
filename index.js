@@ -617,7 +617,7 @@ app.post('/listarAdocao', (req,resp) => {
 
 });
 
-app.post('/menu.html', (req, resp) => {
+app.get('/menu.html', (req, resp) => {
     
         resp.write(`
         
