@@ -38,19 +38,21 @@ function usuarioEstaAutenticado (requisicao, resposta, next)
         resposta.redirect('/login.html');
     }
 }
-
+var date;
 function autenticarUsuario(requisicao, resposta)
 {   
     const usuario = requisicao.body.user;
     const senha = requisicao.body.senha;
     if(usuario == 'admin' && senha == '123')
     {
+        
         requisicao.session.usuarioAutenticado = true;
         resposta.cookie('dataUltimoAcesso', new Date().toLocaleString(), {
             httpOnly: true,
             maxAge: 1000 * 60 * 60 * 24 * 30
         });
         resposta.redirect('/menu.html');
+        date = requisicao.cookies.dataUltimoAcesso;
     }
     else
     {
@@ -67,6 +69,7 @@ function autenticarUsuario(requisicao, resposta)
         if (requisicao.cookies.dataUltimoAcesso)
         {
             resposta.write('<p>');
+            
             resposta.write('Seu último acesso foi em ' + requisicao.cookies.dataUltimoAcesso);
             resposta.write('</p>');
         }
@@ -75,6 +78,7 @@ function autenticarUsuario(requisicao, resposta)
         resposta.end();
     }
 }
+
 
 app.post ('/login', autenticarUsuario);
 
@@ -520,6 +524,7 @@ app.get('/adotar', (req, resp) => {
     resp.end();
 });
 
+// adoção de pet
 function formAdocao (req, resp)
 {
     const dataAdocao = new Date ();
@@ -611,7 +616,53 @@ app.get('/listarAdocao', (req,resp) => {
 
 });
 
-// adoção de pet
+
+app.get('/menu.html', (req, resp) => {
+    
+        resp.write(`
+        
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Menu</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="menu.html">Pet shop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" href="cadastroInteressados.html">Cadastro de interessados</a>
+              <a class="nav-link" href="cadastroPet.html">Cadastro de pets</a>
+              <a class="nav-link" href="/adotar">Adotar um Pet</a>
+              <a class="nav-link" href="/logout">Sair</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    `);
+
+    resp.write('<p>');
+    resp.write('Seu último acesso foi em ' + date);
+    resp.write('</p>');
+
+    
+    resp.write(` 
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
+        
+        `);
+  });
 
 app.use(usuarioEstaAutenticado,express.static(path.join(process.cwd(), 'protegido')));
 app.post('/cadastroInteressados', cadastrarInteressados);
